@@ -4,6 +4,7 @@ export default function TelevisionLoader(scene, renderer, camera) {
   const gltfloader = new GLTFLoader();
   gltfloader.load("/static/models/tv/scene.gltf", (gltf) => {
     scene.add(gltf.scene);
+    gltf.scene.rotation.y = Math.PI / 2;
     renderer.render(scene, camera);
   });
 }
