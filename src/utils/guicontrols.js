@@ -1,13 +1,89 @@
 import GUI from "lil-gui";
 
-export default function SetupGui(camera, computerModel) {
+export default function SetupGui(
+  camera,
+  computerModel,
+  TVModel,
+  phoneModel,
+  videoTexture
+) {
   const gui = new GUI();
 
+  const settings = {
+    isVisiblePC: true,
+    isVisibleTV: true,
+    isVisiblePhone: true,
+    offsetX: 0,
+    offsetY: 0,
+    repeatUniform: 1,
+    rotation: 0,
+  };
+
+  // Contrôles de la caméra
   gui.add(camera.position, "x", -10, 10).name("Camera X");
   gui.add(camera.position, "y", -10, 10).name("Camera Y");
   gui.add(camera.position, "z", -10, 10).name("Camera Z");
 
-  gui.add(computerModel.position, "x", -10, 10).name("Position TV x");
-  gui.add(computerModel.position, "y", -10, 10).name("Position TV y");
-  gui.add(computerModel.position, "z", -10, 10).name("Position TV z");
+  // Contrôles pour le modèle PC
+  gui.add(computerModel.position, "x", -10, 10).name("Position PC x");
+  gui.add(computerModel.position, "y", -10, 10).name("Position PC y");
+  gui.add(computerModel.position, "z", -10, 10).name("Position PC z");
+  gui
+    .add(settings, "isVisiblePC")
+    .name("Voir PC")
+    .onChange((value) => {
+      computerModel.visible = value;
+    });
+
+  // Contrôles pour le modèle TV
+  gui.add(TVModel.position, "x", -10, 10).name("Position TV x");
+  gui.add(TVModel.position, "y", -10, 10).name("Position TV y");
+  gui.add(TVModel.position, "z", -10, 10).name("Position TV z");
+  gui
+    .add(settings, "isVisibleTV")
+    .name("Voir TV")
+    .onChange((value) => {
+      TVModel.visible = value;
+    });
+
+  // Contrôles pour le modèle téléphone
+  gui.add(phoneModel.position, "x", -10, 10).name("Position Phone x");
+  gui.add(phoneModel.position, "y", -10, 10).name("Position Phone y");
+  gui.add(phoneModel.position, "z", -10, 10).name("Position Phone z");
+  gui
+    .add(settings, "isVisiblePhone")
+    .name("Voir Phone")
+    .onChange((value) => {
+      phoneModel.visible = value;
+    });
+
+  videoTexture.center.set(0.5, 0.5);
+
+  //contrôles pour le repeat uniforme et le décalage
+  gui
+    .add(settings, "repeatUniform", 0.1, 5)
+    .name("Zoom")
+    .onChange((value) => {
+      videoTexture.repeat.set(value, value);
+    });
+
+  gui
+    .add(settings, "offsetX", -1, 2)
+    .name("Offset X")
+    .onChange((value) => {
+      videoTexture.offset.x = value;
+    });
+  gui
+    .add(settings, "offsetY", -1, 2)
+    .name("Offset Y")
+    .onChange((value) => {
+      videoTexture.offset.y = value;
+    });
+
+  gui
+    .add(settings, "rotation", -Math.PI, Math.PI)
+    .name("Rotation")
+    .onChange((value) => {
+      videoTexture.rotation = value;
+    });
 }
