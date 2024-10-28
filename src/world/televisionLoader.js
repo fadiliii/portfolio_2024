@@ -5,10 +5,16 @@ export function TelevisionLoader(scene, renderer, camera) {
   const gltfLoader = new GLTFLoader();
   return new Promise((resolve, reject) => {
     gltfLoader.load(
-      "/static/models/tv/scene2.gltf",
+      "/static/models/tv/scene3.glb",
       (gltf) => {
         const TVModel = gltf.scene;
         TVModel.rotation.y = Math.PI / 2;
+
+        TVModel.traverse((child) => {
+          if (child.isMesh) {
+            console.log("Mesh Name: ", child.name); // Affiche le nom du mesh
+          }
+        });
 
         // Trouver le maillage de l'écran
         const screenMesh = TVModel.getObjectByName("tv_screen");
@@ -51,7 +57,6 @@ export function TelevisionLoader(scene, renderer, camera) {
           // Ajuste les dimensions de la texture vidéo pour éviter le zoom
           videoTexture.needsUpdate = true;
         }
-
         scene.add(TVModel);
         renderer.render(scene, camera);
         resolve({ TVModel, videoTexture });
