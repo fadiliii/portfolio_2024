@@ -14,6 +14,7 @@ export default async function ComputerLoader(scene, renderer, camera) {
         computerModel.rotation.y = Math.PI / 2;
         computerModel.position.y = -1.56;
         computerModel.position.x = 1.14;
+        computerModel.visible = false;
 
         resolve(computerModel);
 
