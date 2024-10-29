@@ -5,7 +5,8 @@ export default function SetupGui(
   computerModel,
   TVModel,
   phoneModel,
-  videoTexture
+  videoTexture,
+  texture
 ) {
   const gui = new GUI();
 
@@ -85,5 +86,32 @@ export default function SetupGui(
     .name("Rotation")
     .onChange((value) => {
       videoTexture.rotation = value;
+    });
+
+  gui
+    .add(settings, "repeatUniform", 0.1, 5)
+    .name("Zoom")
+    .onChange((value) => {
+      texture.repeat.set(value, value);
+    });
+
+  gui
+    .add(settings, "offsetX", -1, 2)
+    .name("Offset X")
+    .onChange((value) => {
+      texture.offset.x = value;
+    });
+  gui
+    .add(settings, "offsetY", -1, 2)
+    .name("Offset Y")
+    .onChange((value) => {
+      texture.offset.y = value;
+    });
+
+  gui
+    .add(settings, "rotation", -Math.PI, Math.PI)
+    .name("Rotation")
+    .onChange((value) => {
+      texture.rotation = value;
     });
 }

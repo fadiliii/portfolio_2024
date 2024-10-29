@@ -9,12 +9,7 @@ export function TelevisionLoader(scene, renderer, camera) {
       (gltf) => {
         const TVModel = gltf.scene;
         TVModel.rotation.y = Math.PI / 2;
-
-        TVModel.traverse((child) => {
-          if (child.isMesh) {
-            console.log("Mesh Name: ", child.name); // Affiche le nom du mesh
-          }
-        });
+        TVModel.visible = false;
 
         // Trouver le maillage de l'écran
         const screenMesh = TVModel.getObjectByName("tv_screen");

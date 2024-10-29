@@ -2,7 +2,7 @@ import animate from "../utils/animations.js";
 import SetupGui from "../utils/guicontrols.js";
 import Resize from "../utils/responsive.js";
 import InitSize from "../utils/sizes.js";
-import ComputerLoader from "../world/computerLoader.js";
+import { ComputerLoader } from "../world/computerLoader.js";
 import { PhoneLoader } from "../world/phoneLoader.js";
 import { TelevisionLoader } from "../world/televisionLoader.js";
 import InitCamera from "./camera.js";
@@ -15,7 +15,11 @@ export default async function startExeperience() {
   const scene = InitScene();
   const { renderer, canvas } = InitRender(sizes);
   const { camera, controls } = InitCamera(aspectRatio, scene, canvas);
-  const computerModel = await ComputerLoader(scene, renderer, camera);
+  const { computerModel, texture } = await ComputerLoader(
+    scene,
+    renderer,
+    camera
+  );
   const { TVModel, videoTexture } = await TelevisionLoader(
     scene,
     renderer,
@@ -24,7 +28,7 @@ export default async function startExeperience() {
   const phoneModel = await PhoneLoader(scene, renderer, camera);
   InitLight(scene);
 
-  SetupGui(camera, computerModel, TVModel, phoneModel, videoTexture);
+  SetupGui(camera, computerModel, TVModel, phoneModel, videoTexture, texture);
 
   Resize(sizes, camera, renderer, scene);
   animate(controls, renderer, scene, camera);
