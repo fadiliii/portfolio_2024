@@ -6,14 +6,13 @@ import createWindows95Texture from "../utils/windows-95";
 export async function ComputerLoader(scene, renderer, camera) {
   return new Promise((resolve, reject) => {
     const gltfloader = new GLTFLoader();
-    const texture = createWindows95Texture(800, 600);
+    const texture = createWindows95Texture(84.9448561668396, 63.90901794154992);
 
     gltfloader.load(
       "/static/models/pc/scene2.glb",
       (gltf) => {
         const computerModel = gltf.scene;
 
-        computerModel.scale.set(0.03, 0.03, 0.03);
         computerModel.rotation.y = Math.PI / 2;
         computerModel.position.y = -1.56;
         computerModel.position.x = 1.14;
@@ -25,9 +24,15 @@ export async function ComputerLoader(scene, renderer, camera) {
             child.material = material;
           }
         });
+        const meshdim = computerModel.getObjectByName("pc_screen");
+
+        const boundingBox = new THREE.Box3().setFromObject(meshdim);
+        const dimensions = new THREE.Vector3();
+        boundingBox.getSize(dimensions);
+        console.log("dimension:", dimensions);
 
         texture.repeat.set(1, 1);
-        texture.offset.set(2.064, 1.336);
+        texture.offset.set(1, 1);
         texture.needsUpdate = true;
 
         scene.add(computerModel);
