@@ -1,6 +1,5 @@
 import * as THREE from "three";
 
-// Fonction pour générer le canevas de l'interface
 export default function createWindows95Texture(width, height) {
   // Création du canevas
   const canvas = document.createElement("canvas");
