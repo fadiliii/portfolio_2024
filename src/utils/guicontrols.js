@@ -62,20 +62,20 @@ export default function SetupGui(
 
   //contrôles pour le repeat uniforme et le décalage
   gui
-    .add(settings, "repeatUniform", 0.1, 5)
+    .add(settings, "repeatUniform", 0.1, 10)
     .name("Zoom")
     .onChange((value) => {
       videoTexture.repeat.set(value, value);
     });
 
   gui
-    .add(settings, "offsetX", -1, 2)
+    .add(settings, "offsetX", -1, 5)
     .name("Offset X")
     .onChange((value) => {
       videoTexture.offset.x = value;
     });
   gui
-    .add(settings, "offsetY", -1, 2)
+    .add(settings, "offsetY", -1, 5)
     .name("Offset Y")
     .onChange((value) => {
       videoTexture.offset.y = value;
@@ -89,20 +89,20 @@ export default function SetupGui(
     });
 
   gui
-    .add(settings, "repeatUniform", 0.1, 5)
+    .add(settings, "repeatUniform", 0.1, 100)
     .name("Zoom")
     .onChange((value) => {
       texture.repeat.set(value, value);
     });
 
   gui
-    .add(settings, "offsetX", -1, 2)
+    .add(settings, "offsetX", -5, 100)
     .name("Offset X")
     .onChange((value) => {
       texture.offset.x = value;
     });
   gui
-    .add(settings, "offsetY", -1, 2)
+    .add(settings, "offsetY", -5, 100)
     .name("Offset Y")
     .onChange((value) => {
       texture.offset.y = value;
