@@ -16,7 +16,7 @@ export async function ComputerLoader(scene, renderer, camera) {
         computerModel.rotation.y = Math.PI / 2;
         computerModel.position.y = -1.56;
         computerModel.position.x = 1.14;
-        computerModel.visible = true;
+        computerModel.visible = false;
 
         computerModel.traverse((child) => {
           if (child.isMesh && child.name === "pc_screen") {
