@@ -15,7 +15,7 @@ export default async function startExeperience() {
   const scene = InitScene();
   const { renderer, canvas } = InitRender(sizes);
   const { camera, controls } = InitCamera(aspectRatio, scene, canvas);
-  const { computerModel, texture } = await ComputerLoader(
+  const { computerModel, Wintexture } = await ComputerLoader(
     scene,
     renderer,
     camera
@@ -25,10 +25,18 @@ export default async function startExeperience() {
     renderer,
     camera
   );
-  const phoneModel = await PhoneLoader(scene, renderer, camera);
+  const { phoneModel, texture } = await PhoneLoader(scene, renderer, camera);
   InitLight(scene);
 
-  SetupGui(camera, computerModel, TVModel, phoneModel, videoTexture, texture);
+  SetupGui(
+    camera,
+    computerModel,
+    TVModel,
+    phoneModel,
+    videoTexture,
+    Wintexture,
+    texture
+  );
 
   Resize(sizes, camera, renderer, scene);
   animate(controls, renderer, scene, camera);

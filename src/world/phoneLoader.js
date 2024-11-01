@@ -26,7 +26,7 @@ export function PhoneLoader(scene, renderer, camera) {
         texture.needsUpdate = true;
 
         renderer.render(scene, camera);
-        resolve(phoneModel);
+        resolve({ phoneModel, texture });
       },
       undefined,
       reject
